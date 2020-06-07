@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
         name="pathomap",
-        version="0.0.4",
+        version="0.0.5",
         author="Abhijit Raj",
         author_email="abhijit18231@iiitd.ac.in",
         description="The Pathomap package",
