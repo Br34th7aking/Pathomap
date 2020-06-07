@@ -28,7 +28,6 @@ def healthyscore(gene_name, organ_list=[], normalize=False, desc=False):
     filepath = pathlib.Path(__file__).parent / 'data/gene_tissue_similarity.csv'
     with open(filepath) as f:
         df = pd.read_csv(filepath)
-        print(df)
         df.rename(columns={"0": "gene_name"}, inplace=True)
 
         if normalize:
