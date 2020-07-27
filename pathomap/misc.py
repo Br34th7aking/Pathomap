@@ -32,7 +32,7 @@ class Meta:
         according to limit and offset
         """
 
-        filepath = pathlib.Path(__file__).parent.parent / 'data/gene_tissue_similarity.csv'
+        filepath = pathlib.Path(__file__).parent / 'data/gene_tissue_similarity.csv'
         with open(filepath) as f:
             df = pd.read_csv(filepath)
             try:
@@ -48,3 +48,8 @@ class Meta:
             return genes[offset:len(genes)]
 
         return genes[offset:offset+limit]
+
+if __name__ == '__main__':
+    m = Meta()
+    print(m.get_gene_list('F', 10))
+    print(m.get_organ_list())

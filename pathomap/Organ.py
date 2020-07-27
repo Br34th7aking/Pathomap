@@ -14,20 +14,21 @@ def gene_values(organ_name, condition='healthy', normalize=False, desc=False, li
         return
 
     if condition == 'pathological':
-        filepath = pathlib.Path(__file__).parent / 'data/abstract_gene_weight_matrix.csv'
-        with open(filepath) as f:
-            df = pd.read_csv(filepath)
-            df.rename(columns={"Unnamed: 0": "gene_name"}, inplace=True)
-
-    else:
         filepath = pathlib.Path(__file__).parent / 'data/gene_tissue_similarity.csv'
         with open(filepath) as f:
             df = pd.read_csv(filepath)
             df.rename(columns={"0": "gene_name"}, inplace=True)
 
+    else:
+        filepath = pathlib.Path(__file__).parent / 'data/expression_value.csv'
+        with open(filepath) as f:
+            df = pd.read_csv(filepath)
+            
+
     try:
         df = df[['gene_name', organ_name]]
     except Exception as e:
+        print(organ_name)
         return 'Exception: Invalid organ name / unavailable data'
 
     if normalize:
@@ -46,4 +47,5 @@ def gene_values(organ_name, condition='healthy', normalize=False, desc=False, li
 
 
 if __name__ == '__main__':
-    print(top_genes('vagina', 'healthy', True))
+    print(gene_values('vagina', 'healthy', False, True))
+    print(gene_values('vagina', 'pathological', False, True))

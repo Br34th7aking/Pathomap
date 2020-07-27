@@ -25,10 +25,9 @@ def  rev_sort_df(df):
 def healthyscore(gene_name, organ_list=[], normalize=False, desc=False):
     """
     """
-    filepath = pathlib.Path(__file__).parent / 'data/gene_tissue_similarity.csv'
+    filepath = pathlib.Path(__file__).parent / 'data/expression_value.csv'
     with open(filepath) as f:
         df = pd.read_csv(filepath)
-        df.rename(columns={"0": "gene_name"}, inplace=True)
 
         if normalize:
             # apply z-scoring on the df
@@ -63,10 +62,10 @@ def healthyscore(gene_name, organ_list=[], normalize=False, desc=False):
 def pathoscore(gene_name, organ_list=[], normalize=False, desc=False):
     """
     """
-    filepath = pathlib.Path(__file__).parent / 'data/abstract_gene_weight_matrix.csv'
+    filepath = pathlib.Path(__file__).parent / 'data/gene_tissue_similarity.csv'
     with open(filepath) as f:
         df = pd.read_csv(filepath)
-        df.rename(columns={"Unnamed: 0": "gene_name"}, inplace=True)
+        df.rename(columns={"0": "gene_name"}, inplace=True)
 
         if normalize:
             # apply z-scoring on the df
@@ -100,8 +99,11 @@ def pathoscore(gene_name, organ_list=[], normalize=False, desc=False):
 if __name__ == '__main__':
     #print(pathoscore('MT-TL1'))
     #print(pathoscore('MT-TL1', organ_list=['adipose_tissue']))
-    #print(pathoscore('MT-TL1', ['adipose_tissue']))
+    print(pathoscore('MT-TL1', ['adipose_tissue'], normalize=True))
+    print(healthyscore('MT-TL1', ['adipose_tissue'], normalize=True))
     #print(pathoscore('MT-TL1', ['adipose_tissue', 'vagina']))
-    print(pathoscore('MT-TL1', ['adipose_tissue', 'vagina'], desc=False))
-    print(pathoscore('MT-TL1', ['adipose_tissue', 'vagina'], desc=True))
-    print(pathoscore('MT-TL1', ['vagina', 'adipose_tissue'], desc=True))
+    # print(pathoscore('MT-TL1', ['adipose_tissue', 'vagina'], desc=False))
+    # print(pathoscore('MT-TL1', ['adipose_tissue', 'vagina'], desc=True))
+    # print(pathoscore('MT-TL1', ['vagina', 'adipose_tissue'], desc=True))
+    # print(healthyscore('FGR', organ_list=['adipose_tissue']))
+    # print(healthyscore('FGR', organ_list=['adipose_tissue'], normalize=True))
